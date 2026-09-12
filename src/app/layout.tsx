@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import Providers from './Providers';
+import Navbar from '@/components/Navbar';
 
 export const metadata: Metadata = {
   title: 'AutoPay - Web3 Paywall',
@@ -14,9 +15,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="antialiased min-h-screen">
+      <body className="antialiased min-h-screen flex flex-col selection:bg-[#FF2E93] selection:text-white">
         <Providers>
-          {children}
+          <Navbar />
+          <div className="flex-1">
+            {children}
+          </div>
         </Providers>
       </body>
     </html>
