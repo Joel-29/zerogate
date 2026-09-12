@@ -3,10 +3,21 @@
 import { PrivyProvider } from '@privy-io/react-auth';
 import { ReactNode } from 'react';
 
+const arcTestnet = {
+  id: 999999,
+  name: 'Arc L1 Testnet',
+  network: 'arc-l1-testnet',
+  nativeCurrency: { name: 'Ether', symbol: 'ETH', decimals: 18 },
+  rpcUrls: { 
+    default: { http: ['https://rpc.arc-l1-testnet.com'] },
+    public: { http: ['https://rpc.arc-l1-testnet.com'] } 
+  },
+} as any;
+
 export default function Providers({ children }: { children: ReactNode }) {
   return (
     <PrivyProvider
-      appId="your-dummy-app-id-here"
+      appId="cmtyog73i041p0ci9is4edkr5"
       config={{
         loginMethods: ['email'],
         appearance: {
@@ -18,13 +29,8 @@ export default function Providers({ children }: { children: ReactNode }) {
         embeddedWallets: {
           createOnLogin: 'users-without-wallets',
         },
-        defaultChain: {
-          id: 999999,
-          name: 'Arc L1 Testnet',
-          network: 'arc-l1-testnet',
-          nativeCurrency: { name: 'Ether', symbol: 'ETH', decimals: 18 },
-          rpcUrls: { default: { http: ['https://rpc.arc-l1-testnet.com'] } },
-        }
+        defaultChain: arcTestnet,
+        supportedChains: [arcTestnet],
       }}
     >
       {children}
