@@ -2,10 +2,11 @@ import type { Metadata } from 'next';
 import './globals.css';
 import Providers from './Providers';
 import Navbar from '@/components/Navbar';
+import { BalanceProvider } from '@/context/BalanceContext';
 
 export const metadata: Metadata = {
-  title: 'AutoPay - Web3 Paywall',
-  description: 'Pay $0.10 in USDC to unlock premium articles.',
+  title: 'UNBLUR - The Zero-Click Paywall',
+  description: 'Read premium internet content without subscriptions.',
 };
 
 export default function RootLayout({
@@ -15,12 +16,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="antialiased min-h-screen flex flex-col selection:bg-[#FF2E93] selection:text-white">
+      <body className="antialiased min-h-screen flex flex-col selection:bg-[#FF2E93] selection:text-white bg-white text-black">
         <Providers>
-          <Navbar />
-          <div className="flex-1">
-            {children}
-          </div>
+          <BalanceProvider>
+            <Navbar />
+            <div className="flex-1">
+              {children}
+            </div>
+          </BalanceProvider>
         </Providers>
       </body>
     </html>
