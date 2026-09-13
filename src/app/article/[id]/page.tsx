@@ -10,6 +10,7 @@ export default function ArticlePage({ params }: { params: { id: string } }) {
   const { balance, deductBalance } = useBalance();
   const [isUnlocked, setIsUnlocked] = useState(false);
   const [isPaying, setIsPaying] = useState(false);
+  const [showReceipt, setShowReceipt] = useState(false);
 
   const handlePayment = () => {
     if (!authenticated) {
@@ -40,8 +41,63 @@ export default function ArticlePage({ params }: { params: { id: string } }) {
     }, 2500);
   };
 
+  const currentDate = new Date().toLocaleString();
+
   return (
-    <main className="min-h-[calc(100vh-104px)] bg-[#f4f4f5] p-6 md:p-16">
+    <main className="min-h-[calc(100vh-104px)] bg-[#f4f4f5] p-6 md:p-16 relative">
+      {/* RECEIPT MODAL */}
+      {showReceipt && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="border-4 border-black bg-white shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] p-8 md:p-12 relative max-w-2xl w-full animate-in zoom-in-95 duration-200">
+            <button 
+              onClick={() => setShowReceipt(false)}
+              className="absolute top-4 right-4 w-12 h-12 flex items-center justify-center border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] bg-[#FF2E93] text-white font-black text-2xl hover:bg-black active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all"
+            >
+              X
+            </button>
+
+            <div className="text-center mb-10">
+              <span className="text-6xl mb-4 block drop-shadow-[4px_4px_0_rgba(0,0,0,1)]">🧾</span>
+              <h2 className="text-4xl md:text-5xl font-black uppercase text-[#00FF41] tracking-tight">Payment Confirmed</h2>
+            </div>
+
+            <div className="space-y-6 font-bold text-xl md:text-2xl mb-12">
+              <div className="flex justify-between border-b-4 border-black pb-4">
+                <span className="text-gray-500 uppercase tracking-widest">Network</span>
+                <span className="text-black">Arc L1 Testnet</span>
+              </div>
+              <div className="flex justify-between border-b-4 border-black pb-4">
+                <span className="text-gray-500 uppercase tracking-widest">Amount Paid</span>
+                <span className="text-black bg-[#FFF455] px-2 border-2 border-black">0.10 USDC</span>
+              </div>
+              <div className="flex justify-between border-b-4 border-black pb-4">
+                <span className="text-gray-500 uppercase tracking-widest">Gas Fee</span>
+                <span className="text-black">0.0001 USDC <span className="text-sm bg-[#00FF41] border-2 border-black px-2 ml-2">(Covered)</span></span>
+              </div>
+              <div className="flex justify-between border-b-4 border-black pb-4">
+                <span className="text-gray-500 uppercase tracking-widest">Recipient</span>
+                <span className="text-black font-black">author.eth</span>
+              </div>
+              <div className="flex flex-col md:flex-row justify-between md:items-center border-b-4 border-black pb-4 gap-2">
+                <span className="text-gray-500 uppercase tracking-widest">Tx Hash</span>
+                <span className="text-black bg-gray-100 border-2 border-black px-2 truncate">0x8F7a...9c3B (Mocked)</span>
+              </div>
+              <div className="flex flex-col md:flex-row justify-between md:items-center border-b-4 border-black pb-4 gap-2">
+                <span className="text-gray-500 uppercase tracking-widest">Timestamp</span>
+                <span className="text-black text-lg md:text-xl">{currentDate}</span>
+              </div>
+            </div>
+
+            <button 
+              onClick={() => alert("Downloading PDF... (Mock)")}
+              className="border-4 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] font-black transition-all duration-200 ease-out hover:bg-black hover:text-[#00FFFF] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none bg-[#00FFFF] text-black px-8 py-4 text-center text-2xl uppercase w-full block"
+            >
+              ↓ Download PDF
+            </button>
+          </div>
+        </div>
+      )}
+
       <div className="max-w-5xl mx-auto space-y-12">
         
         <div className="flex items-center justify-between">
@@ -65,12 +121,15 @@ export default function ArticlePage({ params }: { params: { id: string } }) {
                 <span className="text-black font-black">0.10 USDC</span>
               </p>
               <p className="flex justify-between border-b-4 border-dashed border-gray-300 pb-4">
-                <span className="text-gray-500 uppercase tracking-widest">Tx Hash</span>
-                <span className="text-black bg-gray-100 px-4 border-4 border-black truncate ml-4">0x7a...4b9c (simulated)</span>
+                <span className="text-gray-500 uppercase tracking-widest">Status</span>
+                <span className="text-black bg-[#FFF455] px-4 border-4 border-black ml-4">CONFIRMED</span>
               </p>
             </div>
-            <button className="border-4 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] font-black transition-all duration-200 ease-out hover:bg-black hover:text-white active:translate-x-[4px] active:translate-y-[4px] active:shadow-none bg-[#FFF455] text-black px-8 py-5 text-center text-2xl uppercase mt-4">
-              View on Arc Explorer ↗
+            <button 
+              onClick={() => setShowReceipt(true)}
+              className="border-4 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] font-black transition-all duration-200 ease-out hover:bg-black hover:text-[#FFF455] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none bg-[#FF2E93] text-white px-8 py-5 text-center text-2xl uppercase mt-4 block"
+            >
+              🧾 View Smart Receipt
             </button>
           </div>
         )}
