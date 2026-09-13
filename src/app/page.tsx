@@ -83,7 +83,7 @@ export default function Dashboard() {
             <div className="border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-10 bg-[#00FFFF] text-black transform hover:-translate-y-2 transition-transform duration-200">
               <h3 className="text-6xl font-black mb-6">2.</h3>
               <h4 className="text-4xl font-bold mb-6 uppercase tracking-tight">Load USDC</h4>
-              <p className="text-2xl font-medium leading-relaxed">Fund your wallet on the Arc Testnet. (We've given you 5.00 mock USDC to start!)</p>
+              <p className="text-2xl font-medium leading-relaxed">Fund your wallet on the Arc Testnet. (We&apos;ve given you 5.00 mock USDC to start!)</p>
             </div>
             <div className="border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-10 bg-[#FFF455] text-black transform hover:-translate-y-2 transition-transform duration-200">
               <h3 className="text-6xl font-black mb-6">3.</h3>

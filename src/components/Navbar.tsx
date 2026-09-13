@@ -2,6 +2,7 @@
 
 import { usePrivy } from '@privy-io/react-auth';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useBalance } from '@/context/BalanceContext';
 
 export default function Navbar() {
@@ -11,7 +12,13 @@ export default function Navbar() {
   return (
     <nav className="flex items-center justify-between p-6 border-b-8 border-black bg-white z-50 sticky top-0">
       <Link href="/" className="text-5xl font-black uppercase tracking-tighter hover:translate-x-1 hover:translate-y-1 transition-transform">
-        UNBLUR
+        <Image
+          src="/zerogate-logo.png"
+          alt="ZeroGate"
+          width={144}
+          height={56}
+          className="h-14 w-36 border-4 border-black object-cover object-center shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
+        />
       </Link>
       
       <div className="flex items-center gap-4">

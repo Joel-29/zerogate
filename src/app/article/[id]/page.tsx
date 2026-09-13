@@ -11,6 +11,7 @@ export default function ArticlePage({ params }: { params: { id: string } }) {
   const [isUnlocked, setIsUnlocked] = useState(false);
   const [isPaying, setIsPaying] = useState(false);
   const [showReceipt, setShowReceipt] = useState(false);
+  const articleId = params.id;
 
   const handlePayment = () => {
     if (!authenticated) {
@@ -44,7 +45,10 @@ export default function ArticlePage({ params }: { params: { id: string } }) {
   const currentDate = new Date().toLocaleString();
 
   return (
-    <main className="min-h-[calc(100vh-104px)] bg-[#f4f4f5] p-6 md:p-16 relative">
+    <main
+      data-article-id={articleId}
+      className="min-h-[calc(100vh-104px)] bg-[#f4f4f5] p-6 md:p-16 relative"
+    >
       {/* RECEIPT MODAL */}
       {showReceipt && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm animate-in fade-in duration-200">
@@ -163,7 +167,7 @@ export default function ArticlePage({ params }: { params: { id: string } }) {
               style={!isUnlocked ? { textShadow: '0 0 16px rgba(0,0,0,0.8)' } : {}}
             >
               <p>
-                Imagine a world where the concept of a "subscription" is entirely obsolete. Instead of paying $15 a month for a dozen different services you barely use, you pay imperceptible micro-transactions—fractions of a cent—only for the exact content you consume. This is the promise of embedded wallets and instantaneous Layer-2 blockchains like Arc.
+                Imagine a world where the concept of a &quot;subscription&quot; is entirely obsolete. Instead of paying $15 a month for a dozen different services you barely use, you pay imperceptible micro-transactions—fractions of a cent—only for the exact content you consume. This is the promise of embedded wallets and instantaneous Layer-2 blockchains like Arc.
               </p>
               
               <p>
@@ -171,7 +175,7 @@ export default function ArticlePage({ params }: { params: { id: string } }) {
               </p>
               
               <p>
-                As we look toward the next decade, platforms that fail to adopt these natively embedded monetization models will find themselves outpaced by decentralized protocols. The creators are moving to where the money flows directly to them, and the users are moving to where they aren't the product. The revolution isn't coming; it's already here, buried beneath the surface of the web.
+                As we look toward the next decade, platforms that fail to adopt these natively embedded monetization models will find themselves outpaced by decentralized protocols. The creators are moving to where the money flows directly to them, and the users are moving to where they aren&apos;t the product. The revolution isn&apos;t coming; it&apos;s already here, buried beneath the surface of the web.
               </p>
             </div>
 
